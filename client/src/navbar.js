@@ -14,7 +14,7 @@ const navbar = (props) => {
             {props.user == "Not Logged in" ? <li> <Link to = "/register" > Register  </Link> </li>: <div className = "breaks"> </div> }
             {props.user == "logged" ? <li> <Link onClick = {handleClick} to = "/login"> Logout </Link> </li>: <div className = "breaks"> </div> }
             {props.user == "Not Logged in" ? <li> <Link to = "/login" > Log in  </Link> </li>: <div className = "breaks"> </div> }
-            
+            {props.user == "OASKDNKLADNKLSADJN"}
         </ul>
         </nav>
         )
