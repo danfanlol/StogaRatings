@@ -11,6 +11,21 @@ const db = mysql.createPool({
     database: "coursereviews",
 })
 
+const db2 = mysql.createPool({
+    host: "localhost",
+    user: "root",
+    password: "password",
+    database: "coursereviewpeople",
+})
+
+app.get('/', (req,res) => {
+    const sqlInsert = "INSERT INTO people (username, fullname, password) VALUES ('asdasd','asdasdsad','asdasdsd');"
+
+    db2.query(sqlInsert, (err, result) => {
+        res.send("HELLO DANIEL");
+    });
+})
+
 app.use(cors());
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -24,9 +39,28 @@ app.get('/api/get', (req,res) => {
     });
 })
 
+app.get('/api/get2', (req,res) => {
+    const sqlSelect = "SELECT * FROM people"
+
+    db2.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+})
 
 
 
+
+app.post("/api/insert2", (req,res) => {
+    const username = req.body.username;
+    const email = req.body.email;
+    const fullname = req.body.fullname;
+    const password= req.body.password;
+    const sqlInsert = "INSERT INTO people (username,fullname,password) VALUES (?,?,?);"
+    
+    db2.query(sqlInsert, [username, fullname ,password], (err, result) => {
+        console.log(err);
+    });
+})
 
 app.post("/api/insert", (req,res) => {
     const courseLevel = req.body.courseLevel;
@@ -43,4 +77,5 @@ app.post("/api/insert", (req,res) => {
 app.listen(3001, () => {
     console.log("running in port 3001")
 })
+
 

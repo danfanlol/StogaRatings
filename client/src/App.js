@@ -4,26 +4,25 @@ import Register from './pages/Register';
 import View from './pages/View';
 import Submit from './pages/Submit';
 import Login from "./pages/Login";
+import {useState} from "react"
+import {Route, Routes} from "react-router-dom";
+
+
+
+
 function App(){
-  let component
-  console.log(window.location.pathname);
-  switch (window.location.pathname){
-    case "/register":
-      component = <Register/>
-      break
-    case "/view":
-      component = <View/>
-      break
-    case "/submit":
-      component = <Submit/>
-      break
-    case "/login":
-      component = <Login/>
-  }
+  const [user,setUser]  = useState("Not Logged in");
   return (
     <>
-      <Navbar/>
-      <div className = "container" > {component}</div>
+      <Navbar setUser = {setUser} user = {user} />
+      <div className = "container" > 
+        <Routes>
+          <Route path = "/register" element={<Register/>} />
+          <Route path = "/submit" element={<Submit/>} />
+          <Route path = "/view" element={<View course = "Biology"/>} />
+          <Route path = "/login" element={<Login user = {user} setUser = {setUser}/>} />
+        </Routes>
+        </div>
     </>
   )
 }

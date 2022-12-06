@@ -1,15 +1,22 @@
 import FormInput from "./components/FormInput"
 import {useRef, useState} from "react";
 import "./Register.css"
-export default function Pricing(){
+import Axios from "axios";
+export default function Register(){
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [fullname, setFullname] = useState("");
     const [password, setPassword] = useState("");
     
     const submitInformation = (e) => {
-        e.preventDefault();
-        console.log(username, email, fullname, password)
+        if (username !== "" && email !== "" && fullname !== "" && password !== ""){
+            Axios.post("http://localhost:3001/api/insert2", {username: username , email: email , fullname: fullname, password: password}).then(() => { alert("success")})
+        }
+        else{
+            alert("You did not fill all of the required boxes")
+            e.preventDefault();
+        }
+    
     }
     return (
     <div>

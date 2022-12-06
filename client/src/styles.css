@@ -34,3 +34,6 @@ body {
 .container{
     text-align: center;
 }
+.breaks{
+    display: none;
+}
